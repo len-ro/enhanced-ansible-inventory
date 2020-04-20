@@ -1,0 +1,44 @@
+all:
+  children:
+    vmware_1:
+      hosts:
+        web_test_host:
+          ansible_host: 172.20.0.10
+          dfilter_env: test
+          dfilter_app: apache
+
+        app_test_host:
+          ansible_host: 172.20.0.11
+          dfilter_env: test
+          dfilter_app: 
+            - appx
+            - appy
+
+        db_host:
+          ansible_host: 172.20.0.12
+          dfilter_env: 
+            - test
+            - prod
+          dfilter_app: db
+          db_user: !keepass db/username
+          db_pass: !keepass db/password
+
+    vmware_2:
+      hosts:
+        web_prod_host:
+          ansible_host: 172.20.0.20
+          dfilter_env: prod
+          dfilter_app: apache
+
+        app_prod_host:
+          ansible_host: 172.20.0.21
+          dfilter_env: prod
+          dfilter_app: appx
+  vars:
+    secret: !vault |
+        $ANSIBLE_VAULT;1.1;AES256
+        39353234643736383839613763663836303932353861303939346638373331393866353232623666
+        6362636462393461306363373565623864393332396461320a383464363762316165303738303830
+        64373532656166623535666335363762336233646333326563306637613562343861386334383536
+        3664663531316532660a653861646266373530343136383038633836323163353831623363656466
+        63326462356539333035316637323162376234303662373165396438653535386435

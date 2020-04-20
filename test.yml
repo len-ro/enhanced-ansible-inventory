@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: 
+          - "{{ hostvars['db_host']['db_user'] }}"
+          - "{{ hostvars['db_host']['db_pass'] }}"
+          - "{{ hostvars['db_host']['secret'] }}"

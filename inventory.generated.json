@@ -1,0 +1,124 @@
+{
+    "app_apache": {
+        "hosts": [
+            "web_test_host", 
+            "web_prod_host"
+        ]
+    }, 
+    "all": {
+        "hosts": [
+            "app_test_host", 
+            "web_test_host", 
+            "db_host", 
+            "app_prod_host", 
+            "web_prod_host"
+        ], 
+        "children": [
+            "vmware_1", 
+            "vmware_2"
+        ], 
+        "vars": {
+            "secret": {
+                "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n39353234643736383839613763663836303932353861303939346638373331393866353232623666\n6362636462393461306363373565623864393332396461320a383464363762316165303738303830\n64373532656166623535666335363762336233646333326563306637613562343861386334383536\n3664663531316532660a653861646266373530343136383038633836323163353831623363656466\n63326462356539333035316637323162376234303662373165396438653535386435\n"
+            }
+        }
+    }, 
+    "_meta": {
+        "hostvars": {
+            "app_test_host": {
+                "dfilter_env": "test", 
+                "ansible_host": "172.20.0.11", 
+                "dfilter_app": [
+                    "appx", 
+                    "appy"
+                ]
+            }, 
+            "app_prod_host": {
+                "dfilter_env": "prod", 
+                "ansible_host": "172.20.0.21", 
+                "dfilter_app": "appx"
+            }, 
+            "web_test_host": {
+                "dfilter_env": "test", 
+                "ansible_host": "172.20.0.10", 
+                "dfilter_app": "apache"
+            }, 
+            "db_host": {
+                "dfilter_env": [
+                    "test", 
+                    "prod"
+                ], 
+                "db_user": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n32383534393036333935346139376562646635396265313662353037663434376636623231313738\n6130326132623464353537376436666434373930363966300a376266316134343531643962326263\n33326665633762316137343565633834313433303463633763376462353737636431333232633763\n3734636635663061610a643166633637656138376233663266636363616430383035623438326631\n3262\n"
+                }, 
+                "ansible_host": "172.20.0.12", 
+                "dfilter_app": "db", 
+                "db_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n34643332653664646132623739313637346132303863653135343737393134326538666637306561\n6564323335393563383236623362366162346466303834660a373664306263356339363234666262\n63383730396663663866323465653933616337376237303535636230316537616439666461626339\n3236383034626565620a633963333761373664396537613531373564666562373235643033323133\n30396332656565393936653330623331663838373231306666633133643632343966\n"
+                }
+            }, 
+            "web_prod_host": {
+                "dfilter_env": "prod", 
+                "ansible_host": "172.20.0.20", 
+                "dfilter_app": "apache"
+            }
+        }
+    }, 
+    "app_db": {
+        "hosts": [
+            "db_host"
+        ]
+    }, 
+    "app": {
+        "children": [
+            "app_appx", 
+            "app_appy", 
+            "app_apache", 
+            "app_db"
+        ]
+    }, 
+    "app_appy": {
+        "hosts": [
+            "app_test_host"
+        ]
+    }, 
+    "app_appx": {
+        "hosts": [
+            "app_test_host", 
+            "app_prod_host"
+        ]
+    }, 
+    "env_test": {
+        "hosts": [
+            "app_test_host", 
+            "web_test_host", 
+            "db_host"
+        ]
+    }, 
+    "env": {
+        "children": [
+            "env_test", 
+            "env_prod"
+        ]
+    }, 
+    "env_prod": {
+        "hosts": [
+            "db_host", 
+            "app_prod_host", 
+            "web_prod_host"
+        ]
+    }, 
+    "vmware_1": {
+        "hosts": [
+            "app_test_host", 
+            "web_test_host", 
+            "db_host"
+        ]
+    }, 
+    "vmware_2": {
+        "hosts": [
+            "app_prod_host", 
+            "web_prod_host"
+        ]
+    }
+}
